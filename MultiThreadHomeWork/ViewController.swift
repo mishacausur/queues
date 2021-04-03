@@ -19,15 +19,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
+
         exampleOne()
-//        exampleTwo()
+        exampleTwo()
     
     }
     
     func exampleOne() {
         var storage: [String] = []
         let concurrentQueue = DispatchQueue(label: "concurrent", attributes: .concurrent)
+
         
         concurrentQueue.sync {
             print("1")
@@ -38,7 +39,7 @@ class ViewController: UIViewController {
            
         }
 
-        concurrentQueue.async {
+        concurrentQueue.sync {
             print("2")
             for i in 0...1000 {
                 storage[i] = "Box: \(i)" //Race Condition проблема возникает из-за того, что вторая задача должна выполнячть вместе с первой, однако даннвые для ее выполнения еще не подготовлены
