@@ -27,24 +27,24 @@ class ViewController: UIViewController {
     
     func exampleOne() {
         var storage: [String] = []
-        let concurrentQueue = DispatchQueue(label: "concurrent", qos: .background, attributes: .concurrent)
+        let concurrentQueue = DispatchQueue(label: "concurrent", qos: .background)
 
         
-        concurrentQueue.sync {
+        concurrentQueue.async {
             print("1")
             for i in 0...1000 {
-//                sleep(1)
+                sleep(1)
                 storage.append("Cell: \(i)")
             }
            
         }
 
-        concurrentQueue.sync {
+        concurrentQueue.async {
             print("2")
             for i in 0...1000 {
                 storage[i] = "Box: \(i)" //Race Condition проблема возникает из-за того, что вторая задача должна выполнячть вместе с первой, однако даннвые для ее выполнения еще не подготовлены
             }
-           
+            print("3")
         }
     }
     
