@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     func exampleOne() {
         var storage: [String] = []
-        let concurrentQueue = DispatchQueue(label: "concurrent", attributes: .concurrent)
+        let concurrentQueue = DispatchQueue(label: "concurrent", qos: .background, attributes: .concurrent)
 
         
         concurrentQueue.sync {
